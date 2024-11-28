@@ -17,6 +17,7 @@ public class UserRepository {
         // :이 ?역할
         Query q = em.createQuery("select u from User u where u.username = :username", User.class);
         q.setParameter("username", username);
+
         try {
             // 변수명 PS 붙인이유 Persistance
 //            User userPS = (User) q.getSingleResult();
@@ -31,5 +32,10 @@ public class UserRepository {
 //            return Optional.ofNullable(null);
             throw new RuntimeException("아이디 혹은 패스워드가 일치하지 않습니다.");
         }
+    }
+
+    public User save(User user) {
+        em.persist(user);
+        return user;
     }
 }

@@ -14,16 +14,14 @@ public class UserController {
     // IOC 컨테이너에서 세션 꺼내옴 (세션은 싱글턴이라서 하나만 있으니까 IOC가 관리해줌)
     private final HttpSession session;
 
+    @PostMapping("/join")
+    public String join(UserRequest.JoinDTO joinDTO) {
+        userService.회원가입(joinDTO);
+        return "redirect:/login-form";
+    }
+
     @GetMapping("/login-form")
     public String loginForm() {
         return "user/login-form";
-    }
-
-    @PostMapping("/login")
-    public String login(UserRequest.LoginDTO loginDTO) {
-        User sessionUser = userService.로그인(loginDTO);
-        session.setAttribute("sessionUser", sessionUser);
-
-        return "redirect:/";
     }
 }
