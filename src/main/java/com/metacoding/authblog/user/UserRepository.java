@@ -13,8 +13,7 @@ public class UserRepository {
     private final EntityManager em;
     
     public User findByUsername(String username) {
-        // createQuery 사용함 주의 / jpql
-        // :이 ?역할
+        // createQuery 사용 / jpql => :이 ?역할
         Query q = em.createQuery("select u from User u where u.username = :username", User.class);
         q.setParameter("username", username);
 

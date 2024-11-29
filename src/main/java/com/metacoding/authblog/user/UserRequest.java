@@ -19,10 +19,12 @@ public class UserRequest {
         private String password;
         private String email;
 
+        // User를 초기화 할 때, 비밀번호는 기존 값을 hash화하여 초기화 한 뒤 반환
         public User toEntity(PasswordEncoder passwordEncoder) {
-            // PasswordEncoder : 패스워드 암호화
+            // PasswordEncoder : 패스워드 해쉬화(암호화)
             String encPassword = passwordEncoder.encode(password);
             User user = new User(null, username, encPassword, email, null);
+            System.out.println(encPassword);
             return user;
         }
     }
